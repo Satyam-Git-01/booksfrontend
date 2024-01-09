@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+const CONNECTION_STRING = process.env.REACT_APP_CONNECTION_STRING;
 const Home = () => {
   const navigate = useNavigate();
   const [books, setBooks] = useState([]);
@@ -11,12 +11,12 @@ const Home = () => {
     return item.title.toLowerCase().includes(searchText.toLowerCase());
   })
   const fetchData = async () => {
-    const result = await axios.get("http://localhost:4600/books/");
+    const result = await axios.get(CONNECTION_STRING);
     return await result.data;
   };
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:4600/books/${id}`)
+      .delete(`${CONNECTION_STRING}/${id}`)
       .then((response) => {
         navigate("/");
       })

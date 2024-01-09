@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams,Link } from "react-router-dom";
 import axios from "axios";
-
+const CONNECTION_STRING = process.env.REACT_APP_CONNECTION_STRING;
 const Edit = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -11,7 +11,7 @@ const Edit = () => {
   const { id } = useParams();
   useEffect(() => {
     axios
-      .get(`http://localhost:4600/books/${id}`)
+      .get(`${CONNECTION_STRING}/${id}`)
       .then((response) => {
         console.log(response);
         const { title, author, genere, publicationDate } = response.data;
@@ -33,7 +33,7 @@ const Edit = () => {
     };
     e.preventDefault();
     axios
-      .put(`http://localhost:4600/books/${id}`, book)
+      .put(`${CONNECTION_STRING}/${id}`, book)
       .then((response) => {
         console.log(response);
         navigate("/");

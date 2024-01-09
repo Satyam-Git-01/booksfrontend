@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import Error from "./Error";
+const CONNECTION_STRING = process.env.REACT_APP_CONNECTION_STRING;
 const BookDetails = () => {
   const [book, setBook] = useState({});
   const { id } = useParams();
   useEffect(() => {
     axios
-      .get(`http://localhost:4600/books/${id}`)
+      .get(`${CONNECTION_STRING}/${id}`)
       .then((response) => {
         console.log(response);
         setBook(response.data);

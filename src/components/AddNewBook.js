@@ -1,26 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
-
+const CONNECTION_STRING = process.env.REACT_APP_CONNECTION_STRING;
 const AddNewBook = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genere, setGenere] = useState("");
   const [publicationDate, setPublicationDate] = useState("");
-  const notify = () => toast("Wow so easy!");
   const handleSubmit = (e) => {
-    if (title.length <= 3) {
-      notify()
-    }
-    if (author.length === 0) {
-    }
-    if (genere.length === 0) {
-    }
-    if (publicationDate.length === 0) {
-    }
     const book = {
       title: title,
       author: author,
@@ -29,7 +18,7 @@ const AddNewBook = () => {
     };
     e.preventDefault();
     axios
-      .post("http://localhost:4600/books", book)
+      .post(`${CONNECTION_STRING}`, book)
       .then((response) => {
         console.log(response);
         navigate("/");
@@ -41,30 +30,30 @@ const AddNewBook = () => {
   return (
     <>
       <form
-        class="max-w-sm mx-auto"
+        className="max-w-sm mx-auto"
         method="post"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div class="mb-5">
+        <div className="mb-5">
           <label
-            for="title"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            htmlFor="title"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Book Title:
           </label>
           <input
             type="text"
             id="title"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <div class="mb-5">
+        <div className="mb-5">
           <label
-            for="password"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Book Author:
           </label>
@@ -72,15 +61,15 @@ const AddNewBook = () => {
             value={author}
             type="text"
             id="author"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
-        <div class="mb-5">
+        <div className="mb-5">
           <label
-            for="password"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Genere:
           </label>
@@ -88,15 +77,15 @@ const AddNewBook = () => {
             value={genere}
             type="text"
             id="author"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             onChange={(e) => setGenere(e.target.value)}
             required
           />
         </div>
-        <div class="mb-5">
+        <div className="mb-5">
           <label
-            for="publicationDate"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            htmlFor="publicationDate"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Published Date:
           </label>
@@ -104,7 +93,7 @@ const AddNewBook = () => {
             value={publicationDate}
             type="date"
             id="publicationDate"
-            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             onChange={(e) => setPublicationDate(e.target.value)}
             required
           />
@@ -112,7 +101,7 @@ const AddNewBook = () => {
 
         <button
           type="submit"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Submit
         </button>

@@ -7,6 +7,7 @@ import Edit from "./components/Edit";
 import AddNewBook from "./components/AddNewBook";
 import { ToastContainer } from "react-toastify";
 function App() {
+  const CONNECTION_STRING = process.env.REACT_APP_CONNECTION_STRING;
   return (
     <>
       <BrowserRouter>
